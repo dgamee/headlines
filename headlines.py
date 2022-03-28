@@ -1,3 +1,4 @@
+from turtle import title
 from webbrowser import get
 import feedparser
 
@@ -34,17 +35,7 @@ def cnn():
 def get_news(site):
     feed = feedparser.parse(rss_feed[site])
     first_article = feed['entries'][0]
-    return """
-    <html>
-    <body>
-        <h1> BBC Headlines </h1>
-        <b>{0}</b> <br/>
-        <i>{1}</i> <br/>
-        <p>{2}</p> <br/>
-    </body>
-    </html>
-
-    """.format(first_article.get('title'), first_article.get('published'), first_article.get('summary'))
+    return render_template('index.html', articles = feed['entries'])
     
 
 if __name__ == '__main__':
